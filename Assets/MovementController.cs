@@ -4,31 +4,46 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    float horizInput;
-    float vertInput;
-    
     [SerializeField]
     Vector3 moveVector;
 
     [SerializeField]
+    float acceleration;
+
+    [SerializeField]
     float walkSpeed;
 
-    CharacterController controller;
+    [SerializeField]
+    float sprintSpeed;
+
+    [SerializeField]
+    bool isSprinting;
+
+    Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        horizInput = Input.GetAxis("Horizontal");
-        vertInput = Input.GetAxis("Vertical");
+        moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
 
-        moveVector = new Vector3(horizInput, 0, vertInput).normalized;
+        isSprinting = (Input.GetKey(KeyCode.LeftShift) && moveVector.magnitude != 0);
+    }
 
-        controller.Move(moveVector * walkSpeed * Time.deltaTime);
+    private void FixedUpdate()
+    {
+        if (!isSprinting)
+        { 
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity + moveVector * acceleration, walkSpeed);
+        }
+        else
+        {
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity + moveVector * acceleration * 2, sprintSpeed);
+        }
     }
 }
