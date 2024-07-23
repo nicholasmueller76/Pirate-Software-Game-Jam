@@ -12,6 +12,12 @@ public class InventoryManager : MonoBehaviour
 
     public int selectedSlot = 0;
 
+    //Event system here for inventory updates to improve performance
+    //and decrease dependencies
+    public delegate void InventoryChange();
+
+    public static event InventoryChange OnHeldItemChanged;
+
     private void Start()
     {
         ChangeSelectedSlot(0);
@@ -58,6 +64,9 @@ public class InventoryManager : MonoBehaviour
         if(freeSlot != null)
         {
             SpawnNewItem(item, freeSlot);
+
+            //Need this here for if first empty slot is the selected slot
+            if (OnHeldItemChanged != null) OnHeldItemChanged();
             return true;
         }
 
@@ -76,6 +85,8 @@ public class InventoryManager : MonoBehaviour
         if(selectedSlot != -1) inventorySlots[selectedSlot].Deselect();
         inventorySlots[newValue].Select();
         selectedSlot = newValue;
+        
+        if(OnHeldItemChanged != null) OnHeldItemChanged();
     }
 
     public Item GetSelectedItem()

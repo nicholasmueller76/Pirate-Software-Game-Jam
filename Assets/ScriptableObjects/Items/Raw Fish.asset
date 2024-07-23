@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Raw Fish
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: ae8ccdce69bd7244590871be7129b219, type: 3}
-  type: 2
+  type: 0
   stackable: 1

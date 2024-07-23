@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b38804379424af14f8f0bdafa330b6f4, type: 3}
-  m_Name: Campfire
+  m_Name: Spear
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 74e08bd0bf3b701439b38cc1f425ccf2, type: 3}
-  type: 4
+  image: {fileID: 21300000, guid: ca74cdc8a23baa049bbb8993f416ab9a, type: 3}
+  type: 0
   stackable: 0

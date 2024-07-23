@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b38804379424af14f8f0bdafa330b6f4, type: 3}
-  m_Name: Mushroom
+  m_Name: Cooked Rabbit
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: c9f9ef4664dec4c45857798130001bb4, type: 3}
-  type: 2
+  image: {fileID: 21300000, guid: 403f742ab358cbb48a283cd26447bd61, type: 3}
+  type: 0
   stackable: 1
