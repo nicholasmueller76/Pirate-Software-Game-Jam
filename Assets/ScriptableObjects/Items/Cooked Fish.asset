@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Cooked Fish
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: b154b9a3f7cf58247802b76ce8b35ef7, type: 3}
-  type: 0
+  type: 2
   stackable: 1

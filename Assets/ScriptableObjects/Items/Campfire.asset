@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Campfire
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 74e08bd0bf3b701439b38cc1f425ccf2, type: 3}
-  type: 0
+  type: 4
   stackable: 0

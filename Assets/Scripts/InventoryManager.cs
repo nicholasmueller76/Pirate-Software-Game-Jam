@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
     [HideInInspector] static int MAX_STACK = 20;
-    [HideInInspector] static int HOTBAR_SLOTS = 7;
 
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
@@ -100,6 +100,100 @@ public class InventoryManager : MonoBehaviour
         else
         {
             return null;
+        }
+    }
+
+    public bool Craft(Recipe recipe)
+    {
+        //check if player has enough of each type of ingredient to craft
+        for (int ii = 0; ii < recipe.Ingredients.Length; ii++)
+        {
+            Item ingredient = recipe.Ingredients[ii];
+            int count = recipe.Counts[ii];
+
+            int found = 0;
+            //check each inventory slot for specified item
+            for (int jj = 0; jj < inventorySlots.Length; jj++)
+            {
+                InventorySlot slot = inventorySlots[jj];
+                InventoryItem slotItem = slot.GetComponentInChildren<InventoryItem>();
+
+                if (slotItem != null)
+                {
+                    if (slotItem.item == ingredient)
+                    {
+                        found += slotItem.count;
+                        if (found >= count) jj = inventorySlots.Length;
+                    }
+                }
+            }
+
+            //if not enough resources found, cancel crafting
+            if (found < count) return false;
+        }
+
+        //remove required ingredients
+        for (int ii = 0; ii < recipe.Ingredients.Length; ii++)
+        {
+            Item ingredient = recipe.Ingredients[ii];
+            int count = recipe.Counts[ii];
+
+            //check each inventory slot for specified item
+            for (int jj = 0; jj < inventorySlots.Length; jj++)
+            {
+                InventorySlot slot = inventorySlots[jj];
+                InventoryItem slotItem = slot.GetComponentInChildren<InventoryItem>();
+
+                if (slotItem != null)
+                {
+                    if (slotItem.item == ingredient)
+                    {
+                        if (count == slotItem.count)
+                        {
+                            Destroy(slotItem.gameObject);
+                            count = 0;
+                            jj = inventorySlots.Length;
+                        }
+                        else if (count > slotItem.count)
+                        {
+                            count -= slotItem.count;
+                            Destroy(slotItem.gameObject);
+                        }
+                        else
+                        {
+                            slotItem.count -= count;
+                            slotItem.RefreshCount();
+                            count = 0;
+                            jj = inventorySlots.Length;
+                        }
+                    }
+                }
+            }
+        }
+
+        //add crafted item
+        if (recipe.output.type != ItemType.Upgrade)
+        {
+            //uses coroutines to ensure that prior destroys have finished
+            StartCoroutine(GiveCrafted(recipe));
+        }
+        else
+        {
+            //item is an upgrade, handle accordingly
+            //TODO: HANDLE ACCORDINGLY
+        }
+        return true;
+    }
+
+    private IEnumerator GiveCrafted(Recipe recipe)
+    {
+        yield return 0;
+        bool res = AddItem(recipe.output);
+
+        //if inventory is full, spawn crafted item on the ground
+        if (!res)
+        {
+            //TODO: SPAWN ITEM ON GROUND
         }
     }
 }

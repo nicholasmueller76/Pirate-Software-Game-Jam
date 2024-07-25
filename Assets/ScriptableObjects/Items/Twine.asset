@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Twine
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 51120ab54f71e024992c3b84bc5691cb, type: 3}
-  type: 0
+  type: 3
   stackable: 1

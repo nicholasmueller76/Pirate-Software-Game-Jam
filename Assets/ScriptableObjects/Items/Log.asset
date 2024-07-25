@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Log
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 780ba9c2f06fc6c46ba6baccb829b573, type: 3}
-  type: 0
+  type: 3
   stackable: 1
