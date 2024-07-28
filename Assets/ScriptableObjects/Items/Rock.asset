@@ -15,3 +15,10 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 1e9781dc5f907be47bbe57543cd7bcb5, type: 3}
   type: 1
   stackable: 1
+  maxStack: 3
+  damage: 2
+  heal: 0
+  throwForce: 10
+  canMineTrees: 0
+  canMineRocks: 0
+  throwableItemPrefab: {fileID: 4563723405399156116, guid: 6164ff5d09df8e349b3d8893907992c9, type: 3}

@@ -18,14 +18,28 @@ public class InventoryManager : MonoBehaviour
 
     public static event InventoryChange OnHeldItemChanged;
 
+    bool inAction;
+
     private void Start()
     {
         ChangeSelectedSlot(0);
     }
 
+    private void OnEnable()
+    {
+        PlayerActionController.OnActionStart += delegate () { inAction = true; };
+        PlayerActionController.OnActionEnd += delegate () { inAction = false; };
+    }
+
+    private void OnDisable()
+    {
+        PlayerActionController.OnActionStart -= delegate () { inAction = true; };
+        PlayerActionController.OnActionEnd -= delegate () { inAction = false; };
+    }
+
     private void Update()
     {
-        if (Input.inputString != null)
+        if (Input.inputString != null && !inAction)
         {
             bool isNumber = int.TryParse(Input.inputString, out int number);
             if (isNumber && number > 0 && number < 8)

@@ -21,29 +21,66 @@ public class MovementController : MonoBehaviour
 
     Rigidbody rb;
 
+    [SerializeField]
+    Animator anim;
+
+    [SerializeField]
+    bool inAction;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
+    private void OnEnable()
+    {
+        PlayerActionController.OnActionStart += delegate () { inAction = true; };
+        PlayerActionController.OnActionEnd += delegate () { inAction = false; };
+    }
+
+    private void OnDisable()
+    {
+        PlayerActionController.OnActionStart -= delegate () { inAction = true; };
+        PlayerActionController.OnActionEnd -= delegate () { inAction = false; };
+    }
+
     // Update is called once per frame
     void Update()
     {
-        moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+        if(!inAction)
+        {
+            moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-        isSprinting = (Input.GetKey(KeyCode.LeftShift) && moveVector.magnitude != 0);
+            isSprinting = (Input.GetKey(KeyCode.LeftShift) && moveVector.magnitude != 0);
+
+            if (moveVector.magnitude != 0)
+            {
+                anim.SetInteger("Horiz MoveDir", (int)moveVector.x);
+                anim.SetInteger("Vert MoveDir", (int)moveVector.z);
+
+                if(moveVector.x != 0)
+                {
+                    anim.SetBool("Facing Right", moveVector.x > 0);
+                }
+            }
+        }
+        else
+        {
+            moveVector = Vector3.zero;
+            isSprinting = false;
+        }
     }
 
     private void FixedUpdate()
     {
         if (!isSprinting)
         { 
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity + moveVector * acceleration, walkSpeed);
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity + moveVector.normalized * acceleration, walkSpeed);
         }
         else
         {
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity + moveVector * acceleration * 2, sprintSpeed);
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity + moveVector.normalized * acceleration * 2, sprintSpeed);
         }
     }
 }
