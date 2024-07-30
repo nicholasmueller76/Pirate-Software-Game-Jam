@@ -10,7 +10,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     float currentHealth;
 
-
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;

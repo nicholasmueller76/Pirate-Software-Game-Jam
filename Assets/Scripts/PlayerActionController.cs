@@ -17,6 +17,7 @@ public class PlayerActionController : MonoBehaviour
     private Item heldItem;
     private bool hoveringOnPickup;
     private bool hoveringOnMineable;
+    private bool hoveringOnBed;
 
     [SerializeField]
     GameObject hand;
@@ -45,6 +46,8 @@ public class PlayerActionController : MonoBehaviour
     public static event PlayerAction OnActionStart;
 
     public static event PlayerAction OnActionEnd;
+
+    public static event PlayerAction OnClickBed;
 
     // Start is called before the first frame update
     void Start()
@@ -88,6 +91,15 @@ public class PlayerActionController : MonoBehaviour
             else
             {
                 hoveringOnMineable = false;
+            }
+
+            if (hit.collider.gameObject.CompareTag("Bed"))
+            {
+                hoveringOnBed = true;
+            }
+            else
+            {
+                hoveringOnBed = false;
             }
         }
 
@@ -140,6 +152,10 @@ public class PlayerActionController : MonoBehaviour
             else if(hoveringOnMineable)
             {
                 //Stuff here for breaking rocks, trees
+            }
+            else if(hoveringOnBed)
+            {
+                OnClickBed();
             }
             else if (heldItem != null)
             {
