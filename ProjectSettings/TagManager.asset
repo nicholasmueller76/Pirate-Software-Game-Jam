@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Pickup
   - Mineable
+  - NPC
+  - Projectile
+  - Ground
+  - Bed
   layers:
   - Default
   - TransparentFX
@@ -13,7 +17,7 @@ TagManager:
   - Interactable
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 

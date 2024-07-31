@@ -9,6 +9,13 @@ public class Item : ScriptableObject
     public Sprite image;
     public ItemType type;
     public bool stackable;
+    public float maxStack;
+    public float damage;
+    public float heal;
+    public float throwForce;
+    public bool canMineTrees;
+    public bool canMineRocks;
+    public GameObject throwableItemPrefab;
 }
 
 public enum ItemType

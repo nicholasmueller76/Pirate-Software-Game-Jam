@@ -15,3 +15,9 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 216bed763442776468932fb9c84af6e0, type: 3}
   type: 0
   stackable: 0
+  maxStack: 0
+  damage: 3
+  heal: 0
+  throwForce: 0
+  canMineTrees: 0
+  canMineRocks: 0
