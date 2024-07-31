@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd938003e155b141be0ac8a51bc8e0a, type: 3}
+  m_Name: Cooked Rabbit
+  m_EditorClassIdentifier: 
+  output: {fileID: 11400000, guid: 88c1ae50bda96f34d9406e2becc09f3c, type: 2}
+  shadowCost: 1
+  Ingredients:
+  - {fileID: 11400000, guid: 35c821e062696224d8f844e701a3d4ed, type: 2}
+  Counts: 01000000
