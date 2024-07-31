@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd938003e155b141be0ac8a51bc8e0a, type: 3}
+  m_Name: Basket
+  m_EditorClassIdentifier: 
+  output: {fileID: 11400000, guid: f273d97f87f651b42a2fd11b87b34511, type: 2}
+  shadowCost: 0
+  Ingredients:
+  - {fileID: 11400000, guid: d62a76c4fe0046c4385cbfe3ffa71ff7, type: 2}
+  - {fileID: 11400000, guid: 430e43c5edcf55a48bcb43cb77bc0c7d, type: 2}
+  Counts: 0a0000000a000000
